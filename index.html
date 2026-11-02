@@ -1,345 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090610">
-  <meta name="description" content="Un pequeño universo creado por Jhon para Carla.">
-  <title>Carla & Jhon | Nuestro universo ♡</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seis mundos para Carla ♡</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div id="stars"></div>
-  <div id="hearts"></div>
+<div class="sparkles" id="sparkles"></div>
 
-  <nav class="navbar">
-    <a class="brand" href="#inicio" onclick="showPage('inicio')">C <span>♡</span> J</a>
+<header class="topbar">
+  <a class="brand" href="#" onclick="goHome()">J <span>♡</span> C</a>
+  <button class="music-button" id="musicButton">♫ Música</button>
+</header>
 
-    <div class="nav-links">
-      <button class="nav-btn active" data-page="inicio">Inicio</button>
-      <button class="nav-btn" data-page="recuerdos">Recuerdos</button>
-      <button class="nav-btn" data-page="universo">Nuestro mundo</button>
-      <button class="nav-btn" data-page="carta">Mi carta</button>
+<audio id="music" loop>
+  <source src="Arctic Monkeys - Do I Wanna Know (Official Video).mp3" type="audio/mpeg">
+</audio>
+
+<main>
+  <!-- PORTADA -->
+  <section id="home" class="screen active home-screen">
+    <div class="home-content">
+      <p class="eyebrow">✦ UN LUGAR HECHO PARA NOSOTROS ✦</p>
+      <h1>Seis mundos,<br><span>un solo amor.</span></h1>
+      <p class="home-intro">
+        Para Carla, porque hay personas que hacen que hasta los días
+        más normales se conviertan en recuerdos especiales.
+      </p>
+      <div class="names">JHON <span>♡</span> CARLA</div>
+      <p class="home-small">Elige una puerta y descubre lo que hay detrás...</p>
     </div>
-  </nav>
 
-  <main>
+    <div class="doors">
+      <button class="door purple-door" onclick="openPage('purple')">
+        <span>01</span><b>Universo morado</b><small>Un mundo para nosotros</small>
+      </button>
+      <button class="door gothic-door" onclick="openPage('gothic')">
+        <span>02</span><b>Nuestro lado gótico</b><small>Oscuro, pero hermoso</small>
+      </button>
+      <button class="door pink-door" onclick="openPage('pink')">
+        <span>03</span><b>Un mundo rosita</b><small>Pequeñas cosas bonitas</small>
+      </button>
+      <button class="door memory-door" onclick="openPage('memories')">
+        <span>04</span><b>Nuestros recuerdos</b><small>Momentos que guardamos</small>
+      </button>
+      <button class="door letter-door" onclick="openPage('letter')">
+        <span>05</span><b>Una carta para ti</b><small>Palabras desde el corazón</small>
+      </button>
+      <button class="door future-door" onclick="openPage('future')">
+        <span>06</span><b>Nuestro mañana</b><small>Todo lo que falta vivir</small>
+      </button>
+    </div>
+    <div class="home-footer">Hecho con cariño, para alguien irrepetible ♡</div>
+  </section>
 
-    <!-- PÁGINA 1: INICIO -->
-    <section class="page active" id="inicio">
-      <div class="container hero">
+  <!-- MUNDO MORADO -->
+  <section id="purple" class="screen purple-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="world-heading">
+      <p class="eyebrow">01 · NUESTRO UNIVERSO</p>
+      <h2>En algún lugar<br>entre las estrellas...</h2>
+      <p>Hay un pequeño universo que siempre me recuerda a ti.</p>
+    </div>
+    <div class="purple-orbit">J <span>♡</span> C</div>
+    <div class="content-panel purple-panel">
+      <h3>Si nuestro amor fuera un universo...</h3>
+      <p>
+        Tendría estrellas con nombres de nuestros recuerdos, planetas
+        hechos de momentos felices y constelaciones que solo nosotros
+        sabríamos reconocer.
+      </p>
+      <p>
+        No necesitaría ser perfecto. Tendría días tranquilos, días
+        complicados, momentos de risas y otros en los que simplemente
+        estar juntos sería suficiente.
+      </p>
+      <p>
+        Y entre tantos lugares inmensos, siempre elegiría ese pequeño
+        rincón donde estamos tú y yo.
+      </p>
+    </div>
+    <div class="purple-cards">
+      <article><span>✦</span><h3>Mi estrella favorita</h3><p>La que hace que incluso la noche más oscura tenga algo bonito.</p></article>
+      <article><span>☾</span><h3>Mi lugar tranquilo</h3><p>Ese sentimiento de paz que aparece cuando pienso en nosotros.</p></article>
+      <article><span>♡</span><h3>Mi coincidencia favorita</h3><p>Haber coincidido contigo entre tantas personas y tantos caminos.</p></article>
+    </div>
+    <p class="world-ending">De todos los universos posibles, me gusta el que tiene tu nombre. ♡</p>
+  </section>
 
-        <span class="eyebrow">Una historia escrita con amor</span>
+  <!-- MUNDO GÓTICO -->
+  <section id="gothic" class="screen gothic-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="gothic-heading">
+      <p class="eyebrow">02 · BELLEZA EN LA OSCURIDAD</p>
+      <h2>Una historia<br>entre rosas negras.</h2>
+      <p>Un rincón elegante, misterioso y solamente nuestro.</p>
+    </div>
+    <div class="rose-decoration">✥ ❦ ✥</div>
+    <div class="gothic-letter">
+      <p class="small-title">A MI PERSONA FAVORITA</p>
+      <h3>Incluso en la noche más larga...</h3>
+      <p>
+        Me gusta imaginar que nuestra historia es como un jardín:
+        no todas las flores crecen al mismo tiempo, no todos los días
+        tienen sol, pero cada detalle forma parte de algo hermoso.
+      </p>
+      <p>
+        Quiero que nunca olvidemos que quererse también significa
+        escucharse, respetarse, aprender y seguir descubriéndose.
+        No hace falta que cada día sea extraordinario para que sea
+        importante.
+      </p>
+      <p>
+        Porque lo bonito de nosotros no está solamente en los grandes
+        momentos, sino también en esas pequeñas cosas que quizá nadie
+        más nota.
+      </p>
+      <div class="gothic-signature">Con todo mi cariño, J. ♡</div>
+    </div>
+    <div class="gothic-quote">
+      <span>❝</span>
+      Lo oscuro también puede guardar las cosas más hermosas.
+      <span>❞</span>
+    </div>
+  </section>
 
-        <div class="main-heart">♡</div>
+  <!-- MUNDO ROSA -->
+  <section id="pink" class="screen pink-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="pink-heading">
+      <p class="eyebrow">03 · UN MUNDO HECHO DE TERNURA</p>
+      <h2>Hola, mi niña<br>chiquita ♡</h2>
+      <p>Este rinconcito es rosita porque quería que fuera tan bonito como los pequeños detalles.</p>
+    </div>
+    <div class="pink-banner">୨୧ Un montón de cariño para ti ୨୧</div>
+    <div class="pink-grid">
+      <article><span>🎀</span><h3>Tu forma de ser</h3><p>Me encanta seguir descubriendo esos detalles que te hacen ser tú.</p></article>
+      <article><span>🌷</span><h3>Tus pequeños detalles</h3><p>Esas cositas que quizá parecen simples, pero que pueden alegrar un día entero.</p></article>
+      <article><span>🧸</span><h3>Los días contigo</h3><p>Hasta los momentos sencillos pueden convertirse en recuerdos que quiero conservar.</p></article>
+      <article><span>💗</span><h3>Lo que deseo</h3><p>Que nunca te falten motivos para sonreír, sentirte valorada y perseguir tus sueños.</p></article>
+    </div>
+    <div class="pink-note">
+      <span>💌</span>
+      <h3>Un recordatorio para Carla</h3>
+      <p>Tu existencia importa. Tus sueños importan. Tu manera de ver el mundo tiene algo único. Nunca dejes de ser tú.</p>
+    </div>
+    <p class="pink-ending">Te mando un universo de corazoncitos. ♡</p>
+  </section>
 
-        <h1>Para ti,<br><span>mi querida Carla</span></h1>
+  <!-- RECUERDOS -->
+  <section id="memories" class="screen memories-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="memories-heading">
+      <p class="eyebrow">04 · NUESTRO ÁLBUM</p>
+      <h2>Pequeños instantes,<br>grandes recuerdos.</h2>
+      <p>Ocho espacios para guardar momentos que tienen un significado especial.</p>
+    </div>
+    <div class="photo-gallery">
+      <figure><img src="foto1.jpeg" alt="Recuerdo juntos"><figcaption>Un momento para guardar ♡</figcaption></figure>
+      <figure><img src="foto2.jpeg" alt="Recuerdo juntos"><figcaption>De esos días que se quedan</figcaption></figure>
+      <figure><img src="foto3.jpeg" alt="Recuerdo juntos"><figcaption>Una parte de nuestra historia</figcaption></figure>
+      <figure><img src="foto4.jpeg" alt="Recuerdo juntos"><figcaption>Un recuerdo bonito</figcaption></figure>
+      <figure><img src="foto5.jpeg" alt="Recuerdo juntos"><figcaption>Otro pedacito de nosotros</figcaption></figure>
+      <figure><img src="foto6.jpeg" alt="Recuerdo juntos"><figcaption>Momentos que valen mucho</figcaption></figure>
+      <figure><img src="foto7.jpeg" alt="Recuerdo juntos"><figcaption>Para recordar siempre</figcaption></figure>
+      <figure><img src="foto8.jpeg" alt="Recuerdo juntos"><figcaption>Y los que todavía faltan ♡</figcaption></figure>
+    </div>
+    <div class="memory-bottom">
+      <h3>Esto todavía no termina...</h3>
+      <p>Quedan fotografías por tomar, lugares por conocer y muchísimos momentos que todavía no tienen una foto, pero que algún día podremos recordar.</p>
+    </div>
+  </section>
 
-        <p class="subtitle">
-          Mi princesa, mi niña chiquita,<br>
-          mi negrita hermosa...
-        </p>
-
-        <div class="divider"></div>
-
-        <p class="intro">
-          Si pudiera regalarte algo en este mundo,
-          te regalaría la oportunidad de verte a través
-          de mis ojos, para que entendieras lo maravillosa
-          que eres para mí.
-        </p>
-
-        <div class="quote-card">
-          <span class="quote-mark">“</span>
-          <p>
-            Hay personas que llegan a nuestra vida
-            y convierten los días normales
-            en recuerdos extraordinarios.
-          </p>
-          <span class="quote-author">Un pensamiento para ti ♡</span>
-        </div>
-
-        <div class="music-card">
-          <div class="music-cover">♫</div>
-          <h3>Nuestra canción</h3>
-          <p>Una melodía para acompañar este pequeño universo.</p>
-
-          <audio id="musicPlayer" controls preload="metadata">
-            <source src="Arctic Monkeys - Do I Wanna Know (Official Video).mp3" type="audio/mpeg">
-            Tu navegador no admite audio.
-          </audio>
-
-          <span class="music-note">
-            Nuestra canción, nuestro pequeño recuerdo.
-          </span>
-        </div>
-
-        <button class="primary-btn" onclick="showPage('recuerdos')">
-          Descubrir nuestro mundo ♡
-        </button>
-
-        <div class="scroll-hint">Desliza y descubre ↓</div>
-
+  <!-- CARTA -->
+  <section id="letter" class="screen letter-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="letter-heading">
+      <p class="eyebrow">05 · ABRE ESTA CARTA</p>
+      <h2>Mi querida Carla...</h2>
+      <p>Hay cosas que merecen más que un mensaje rápido.</p>
+    </div>
+    <article class="paper-letter">
+      <div class="letter-flower">❀</div>
+      <p>Mi negrita hermosa:</p>
+      <p>
+        Quería hacerte algo diferente. No solamente escribirte unas
+        cuantas palabras y decirte que te quiero, sino crear un pequeño
+        lugar donde pudieras encontrar un poquito de todo lo que
+        significas para mí.
+      </p>
+      <p>
+        A veces pienso en lo curioso que es coincidir con alguien.
+        Cada persona tiene su propio mundo, sus ideas, sus sueños,
+        sus días buenos y sus días difíciles. Y entre tantas cosas,
+        nosotros terminamos construyendo una historia.
+      </p>
+      <p>
+        No quiero decirte que todo será perfecto, porque ninguna
+        historia lo es. Quiero que podamos seguir aprendiendo,
+        hablando con sinceridad, apoyándonos y cuidando lo que
+        estamos construyendo.
+      </p>
+      <p>
+        Gracias por los momentos que hemos compartido, por las risas,
+        por las conversaciones y por cada recuerdo que se ha quedado
+        conmigo. También gracias por permitirme conocerte un poquito
+        más cada día.
+      </p>
+      <p>
+        Mi vida, deseo que nunca sientas que tienes que dejar de ser
+        tú para ser querida. Quiero verte crecer, cumplir tus metas,
+        descubrir cosas nuevas y sentirte orgullosa de la persona
+        en la que te estás convirtiendo.
+      </p>
+      <p>
+        Si algún día vuelves a esta página, quiero que recuerdes que
+        fue creada pensando en ti. Cada color, cada fotografía y cada
+        pequeño detalle tiene la intención de regalarte una sonrisa.
+      </p>
+      <p>
+        Te quiero, mi amor. Y todavía nos quedan muchas páginas
+        bonitas por escribir.
+      </p>
+      <div class="letter-signature">
+        Con muchísimo cariño,<br>
+        <strong>Tu Jhon ♡</strong>
       </div>
-    </section>
+    </article>
+  </section>
 
+  <!-- FUTURO -->
+  <section id="future" class="screen future-world">
+    <button class="back-button" onclick="goHome()">← Volver a los mundos</button>
+    <div class="future-heading">
+      <p class="eyebrow">06 · LO QUE TODAVÍA NOS ESPERA</p>
+      <h2>Lo mejor de la historia<br>también está por venir.</h2>
+      <p>No sabemos exactamente cómo será el mañana, pero hay muchas cosas bonitas que podemos soñar.</p>
+    </div>
+    <div class="future-list">
+      <article><span>01</span><div><h3>Conocer lugares nuevos</h3><p>Descubrir rincones, caminar por lugares diferentes y coleccionar experiencias.</p></div></article>
+      <article><span>02</span><div><h3>Celebrar nuestros logros</h3><p>Aplaudir cada meta alcanzada y apoyarnos en los nuevos desafíos.</p></div></article>
+      <article><span>03</span><div><h3>Crear más recuerdos</h3><p>Tomar más fotografías, reírnos de anécdotas y tener historias que contar.</p></div></article>
+      <article><span>04</span><div><h3>Seguir creciendo</h3><p>Aprender a escucharnos, comprendernos y construir algo bonito con paciencia.</p></div></article>
+    </div>
+    <div class="future-final">
+      <div class="moon">☾</div>
+      <h3>Una última cosita...</h3>
+      <p>Gracias por formar parte de mi historia, Carla. Esta página tiene seis mundos, pero todavía quedan muchísimos momentos que no caben aquí.</p>
+      <div class="final-names">JHON <span>♡</span> CARLA</div>
+      <button class="restart-button" onclick="goHome()">Volver a recorrer nuestros mundos ↗</button>
+    </div>
+  </section>
+</main>
 
-    <!-- PÁGINA 2: RECUERDOS -->
-    <section class="page" id="recuerdos">
-      <div class="container">
-
-        <span class="eyebrow">Capítulo I · Nuestros momentos</span>
-
-        <h2>Pequeños recuerdos,<br><span>grandes sentimientos</span></h2>
-
-        <p class="section-description">
-          Cada fotografía guarda un instante,
-          pero lo bonito es que cada instante contigo
-          se convierte en algo que quiero recordar.
-        </p>
-
-        <div class="divider"></div>
-
-        <h3 class="section-title">Nuestra pequeña galería ♡</h3>
-
-        <div class="gallery">
-
-          <article class="photo-card">
-            <img src="foto1.jpeg" alt="Nuestro recuerdo número uno">
-            <div class="photo-caption">
-              <h3>Un momento especial</h3>
-              <p>De esos instantes que quisiera repetir.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto2.jpeg" alt="Nuestro recuerdo número dos">
-            <div class="photo-caption">
-              <h3>Tu sonrisa</h3>
-              <p>Una de mis cosas favoritas del mundo.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto3.jpeg" alt="Nuestro recuerdo número tres">
-            <div class="photo-caption">
-              <h3>Nosotros</h3>
-              <p>Mi casualidad favorita.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto4.jpeg" alt="Nuestro recuerdo número cuatro">
-            <div class="photo-caption">
-              <h3>Un recuerdo más</h3>
-              <p>Y todavía nos faltan muchísimos.</p>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="quote-card">
-          <p class="poetic">
-            "No necesito que todos mis días sean perfectos,
-            solamente quiero que en muchos de ellos estés tú."
-          </p>
-        </div>
-
-        <button class="secondary-btn" onclick="showPage('inicio')">← Volver</button>
-        <button class="primary-btn" onclick="showPage('universo')">Siguiente capítulo →</button>
-
-      </div>
-    </section>
-
-
-    <!-- PÁGINA 3: NUESTRO UNIVERSO -->
-    <section class="page" id="universo">
-      <div class="container">
-
-        <span class="eyebrow">Capítulo II · Mi lugar favorito</span>
-
-        <h2>Un mundo donde<br><span>estamos tú y yo</span></h2>
-
-        <p class="section-description">
-          De todos los lugares que existen,
-          de todas las ciudades y paisajes,
-          mi lugar favorito sigue siendo a tu lado.
-        </p>
-
-        <div class="divider"></div>
-
-        <h3 class="section-title">Más pedacitos de nosotros 🌷</h3>
-
-        <div class="gallery">
-
-          <article class="photo-card">
-            <img src="foto5.jpeg" alt="Otro recuerdo juntos">
-            <div class="photo-caption">
-              <h3>Mi persona favorita</h3>
-              <p>Qué bonito coincidir contigo.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto6.jpeg" alt="Un momento especial">
-            <div class="photo-caption">
-              <h3>Una sonrisa para siempre</h3>
-              <p>Tu felicidad también es la mía.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto7.jpeg" alt="Un recuerdo inolvidable">
-            <div class="photo-caption">
-              <h3>Una historia bonita</h3>
-              <p>Y apenas estamos escribiendo sus páginas.</p>
-            </div>
-          </article>
-
-          <article class="photo-card">
-            <img src="foto8.jpeg" alt="Otro recuerdo de nosotros">
-            <div class="photo-caption">
-              <h3>Contigo</h3>
-              <p>Siempre hay algo bonito que recordar.</p>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="quote-card">
-          <p class="poetic">
-            "El amor no consiste en mirarse el uno al otro,
-            sino en mirar juntos en la misma dirección."
-          </p>
-          <span class="quote-author">— Antoine de Saint-Exupéry</span>
-        </div>
-
-        <div class="promise-card">
-          <span class="promise-icon">🌙</span>
-          <h3>Una pequeña promesa</h3>
-          <p>
-            Quiero seguir creando recuerdos contigo,
-            conocer nuevos lugares, compartir risas
-            y tener miles de fotografías que algún día
-            podamos mirar con una sonrisa.
-          </p>
-        </div>
-
-        <button class="secondary-btn" onclick="showPage('recuerdos')">← Volver</button>
-        <button class="primary-btn" onclick="showPage('carta')">Hay algo que quiero decirte →</button>
-
-      </div>
-    </section>
-
-
-    <!-- PÁGINA 4: CARTA -->
-    <section class="page" id="carta">
-      <div class="container">
-
-        <span class="eyebrow">Capítulo III · Desde mi corazón</span>
-
-        <h2>Una carta para<br><span>mi niña hermosa</span></h2>
-
-        <div class="letter-decoration">💌</div>
-
-        <article class="letter-card">
-
-          <p class="letter-greeting">Mi querida Carla:</p>
-
-          <p>
-            No sé exactamente cómo empezar esta carta,
-            porque a veces siento que ni todas las palabras
-            del mundo serían suficientes para explicarte
-            lo mucho que significas para mí.
-          </p>
-
-          <p>
-            Quiero que sepas que eres una persona
-            increíblemente especial. Me encanta saber
-            que existes, que puedo llamarte mi princesa,
-            mi niña chiquita, mi negrita hermosa.
-          </p>
-
-          <p>
-            No prometo que todos los días sean perfectos,
-            porque sé que la vida tiene momentos difíciles.
-            Pero sí quiero prometerte que siempre intentaré
-            cuidar lo bonito que tenemos, escucharte,
-            comprenderte y hacerte sentir amada.
-          </p>
-
-          <p>
-            Quiero ser parte de tus alegrías, acompañarte
-            en tus días complicados, celebrar tus logros
-            y recordarte lo increíble que eres cuando tú
-            misma lo olvides.
-          </p>
-
-          <p>
-            Quiero que sigamos construyendo recuerdos,
-            descubriendo nuevas cosas y encontrando
-            motivos para elegirnos una y otra vez.
-          </p>
-
-          <p>
-            No eres solamente alguien a quien quiero.
-            Eres alguien a quien admiro, alguien que
-            hace que mi mundo tenga colores diferentes.
-            Te amo mi reina hermosa
-          </p>
-
-          <p>
-            Gracias por existir, Carli.
-            Gracias por ser tú.
-          </p>
-
-          <div class="letter-signature">
-            Con todo mi cariño,<br>
-            <span>Tu Jhon ♡</span>
-          </div>
-
-        </article>
-
-        <div class="final-message">
-          <div class="main-heart">💗</div>
-
-          <h2>Te quiero,mi Carli</h2>
-
-          <p>
-            Y si algún día dudas de lo especial que eres,
-            vuelve aquí y recuerda que alguien creó
-            este para usted solo para usted el amor de mi vida.
-          </p>
-
-          <p class="final-quote">
-            "En un mundo lleno de personas,
-            qué bonito que seas tú."
-          </p>
-
-          <span class="signature">Para ti, hoy y siempre. ♡</span>
-        </div>
-
-        <button class="primary-btn" onclick="showPage('inicio')">
-          Volver a nuestro comienzo ♡
-        </button>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-heart">♡</div>
-    Hecho con amor por Jhon, exclusivamente para Carla.
-    <p>Un pequeño universo que lleva tu nombre.</p>
-    <span>2026 · Carla & Jhon</span>
-  </footer>
-
-  <script src="script.js"></script>
+<footer>Un pequeño universo creado para Carla · J ♡ C</footer>
+<script src="script.js"></script>
 </body>
 </html>
