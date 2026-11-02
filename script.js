@@ -1,123 +1,210 @@
-// NAVEGACIÓN ENTRE LAS OCHO VENTANILLAS
+document.addEventListener("DOMContentLoaded", () => {
 
-const pages = document.querySelectorAll(".page");
-const navLinks = document.querySelectorAll(".nav-link");
+  // ELEMENTOS PRINCIPALES
+  const pages = document.querySelectorAll(".page");
+  const navButtons = document.querySelectorAll("[data-page]");
+  const goButtons = document.querySelectorAll("[data-go]");
+  const footerButtons = document.querySelectorAll(".footer-center button");
 
-function showPage(pageName) {
-  const selectedPage = document.getElementById(pageName);
+  // NAVEGACIÓN ENTRE LAS OCHO VENTANILLAS
+  function showPage(pageId, updateHash = true) {
+    const target = document.getElementById(pageId);
 
-  if (!selectedPage) return;
+    if (!target || !target.classList.contains("page")) return;
 
-  pages.forEach(page => {
-    page.classList.remove("active");
-  });
+    pages.forEach(page => {
+      page.classList.remove("active");
+    });
 
-  selectedPage.classList.add("active");
+    target.classList.add("active");
 
-  navLinks.forEach(link => {
-    link.classList.toggle(
-      "active",
-      link.dataset.page === pageName
-    );
-  });
+    navButtons.forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.page === pageId
+      );
+    });
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+    footerButtons.forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.go === pageId
+      );
+    });
 
-  history.replaceState(null, "", "#" + pageName);
-}
-
-// Botones del menú
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    showPage(link.dataset.page);
-  });
-});
-
-// Logo
-document.querySelector(".brand").addEventListener("click", event => {
-  event.preventDefault();
-  showPage("inicio");
-});
-
-// Botones que llevan a otras secciones
-document.querySelectorAll("[data-go]").forEach(button => {
-  button.addEventListener("click", () => {
-    showPage(button.dataset.go);
-  });
-});
-
-// Abrir directamente una sección mediante el enlace
-const initialPage = window.location.hash.replace("#", "");
-
-if (initialPage && document.getElementById(initialPage)) {
-  showPage(initialPage);
-}
-
-
-// REPRODUCTOR DE MÚSICA
-
-const music = document.getElementById("backgroundMusic");
-const musicButton = document.getElementById("musicButton");
-const musicText = document.getElementById("musicText");
-
-musicButton.addEventListener("click", async () => {
-  if (music.paused) {
-    try {
-      await music.play();
-      musicButton.classList.add("playing");
-      musicText.textContent = "Música encendida";
-    } catch (error) {
-      musicText.textContent = "No se pudo reproducir";
+    if (updateHash) {
+      history.replaceState(null, "", `#${pageId}`);
     }
-  } else {
-    music.pause();
-    musicButton.classList.remove("playing");
-    musicText.textContent = "Música apagada";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+    setTimeout(observeReveals, 100);
   }
-});
 
-music.addEventListener("ended", () => {
-  musicButton.classList.remove("playing");
-  musicText.textContent = "Música apagada";
-});
-
-
-// GALERÍA DE FOTOGRAFÍAS
-
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-const closeLightbox = document.getElementById("closeLightbox");
-
-document.querySelectorAll(".photo").forEach(photo => {
-  photo.addEventListener("click", () => {
-    const imagePath = photo.dataset.photo;
-
-    lightboxImage.src = imagePath;
-    lightbox.classList.add("open");
-    document.body.style.overflow = "hidden";
+  navButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.page);
+    });
   });
-});
 
-function closePhoto() {
-  lightbox.classList.remove("open");
-  document.body.style.overflow = "";
-  lightboxImage.src = "";
-}
+  goButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.go);
+    });
+  });
 
-closeLightbox.addEventListener("click", closePhoto);
+  footerButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      showPage(button.dataset.go);
+    });
+  });
 
-lightbox.addEventListener("click", event => {
-  if (event.target === lightbox) {
-    closePhoto();
+  // ABRIR LA SECCIÓN INDICADA EN LA DIRECCIÓN
+  const initialPage = location.hash.replace("#", "");
+
+  if (initialPage && document.getElementById(initialPage)?.classList.contains("page")) {
+    showPage(initialPage, false);
+  } else {
+    showPage("inicio", false);
   }
-});
 
-// Cerrar fotografía con Escape
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closePhoto();
+  window.addEventListener("hashchange", () => {
+    const pageId = location.hash.replace("#", "");
+    if (pageId) showPage(pageId, false);
+  });
+
+
+  // MÚSICA
+  const music = document.getElementById("backgroundMusic");
+  const musicButton = document.getElementById("musicButton");
+  const musicLabel = document.getElementById("musicLabel");
+
+  musicButton.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        musicButton.classList.add("playing");
+        musicLabel.textContent = "SONANDO";
+      } catch (error) {
+        musicLabel.textContent = "INTENTA OTRA VEZ";
+      }
+    } else {
+      music.pause();
+      musicButton.classList.remove("playing");
+      musicLabel.textContent = "ESCUCHAR";
+    }
+  });
+
+  music.addEventListener("ended", () => {
+    musicButton.classList.remove("playing");
+    musicLabel.textContent = "ESCUCHAR";
+  });
+
+
+  // GALERÍA Y FOTOGRAFÍAS
+  const photos = Array.from(
+    document.querySelectorAll(".photo-card img")
+  ).map(img => img.src);
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCounter = document.getElementById("lightboxCounter");
+
+  const closeLightbox = document.getElementById("closeLightbox");
+  const previousPhoto = document.getElementById("previousPhoto");
+  const nextPhoto = document.getElementById("nextPhoto");
+
+  let currentPhoto = 0;
+
+  function updateLightbox() {
+    lightboxImage.src = photos[currentPhoto];
+    lightboxCounter.textContent =
+      `${String(currentPhoto + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
   }
+
+  function openLightbox(index) {
+    currentPhoto = index;
+    updateLightbox();
+
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    closeLightbox.focus();
+  }
+
+  function hideLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  function changePhoto(direction) {
+    currentPhoto =
+      (currentPhoto + direction + photos.length) % photos.length;
+
+    updateLightbox();
+  }
+
+  document.querySelectorAll(".photo-card").forEach(card => {
+    card.addEventListener("click", () => {
+      openLightbox(Number(card.dataset.photo));
+    });
+  });
+
+  closeLightbox.addEventListener("click", hideLightbox);
+
+  previousPhoto.addEventListener("click", () => {
+    changePhoto(-1);
+  });
+
+  nextPhoto.addEventListener("click", () => {
+    changePhoto(1);
+  });
+
+  lightbox.addEventListener("click", event => {
+    if (event.target === lightbox) {
+      hideLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (!lightbox.classList.contains("open")) return;
+
+    if (event.key === "Escape") {
+      hideLightbox();
+    }
+
+    if (event.key === "ArrowRight") {
+      changePhoto(1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      changePhoto(-1);
+    }
+  });
+
+
+  // ANIMACIONES AL APARECER LOS ELEMENTOS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12
+  });
+
+  function observeReveals() {
+    document.querySelectorAll(".page.active .reveal:not(.visible)")
+      .forEach(element => observer.observe(element));
+  }
+
+  observeReveals();
+
 });
