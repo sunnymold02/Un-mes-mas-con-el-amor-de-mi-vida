@@ -1,251 +1,685 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap');
 
-// ======================================
-// CARLA & JHON - NUESTRO UNIVERSO ♡
-// ======================================
+:root {
+  --black: #090610;
+  --dark: #120b19;
+  --purple: #32163e;
+  --pink: #e8a1cf;
+  --light-pink: #f9dcef;
+  --text: #e5d5e8;
+  --muted: #bba7c0;
+  --gold: #d9b6a2;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// 1. NAVEGACIÓN ENTRE LAS CUATRO PÁGINAS
+html {
+  scroll-behavior: smooth;
+}
 
-function showPage(pageId) {
+body {
+  background: var(--black);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-  const pages = document.querySelectorAll('.page');
-  const buttons = document.querySelectorAll('.nav-btn');
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse at 15% 15%, #62247755, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, #871d6040, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, #25142e, #090610 75%);
+}
 
-  pages.forEach(page => {
-    page.classList.remove('active');
-  });
+button {
+  font-family: inherit;
+}
 
-  buttons.forEach(button => {
-    button.classList.remove('active');
-  });
+/* ESTRELLAS */
 
-  const selectedPage = document.getElementById(pageId);
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
 
-  if (!selectedPage) return;
+.star {
+  position: absolute;
+  color: #e9b9ef;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
 
-  selectedPage.classList.add('active');
+@keyframes twinkle {
+  0% {
+    opacity: .15;
+    transform: scale(.7);
+  }
+  100% {
+    opacity: .9;
+    transform: scale(1.3);
+  }
+}
 
-  const selectedButton = document.querySelector(
-    `.nav-btn[data-page="${pageId}"]`
-  );
+/* CORAZONES */
 
-  if (selectedButton) {
-    selectedButton.classList.add('active');
+#hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.heart {
+  position: absolute;
+  bottom: -35px;
+  color: #e995cb;
+  animation: floatHeart linear forwards;
+  text-shadow: 0 0 15px #e98acb;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
   }
 
-  // Actualizar la dirección sin recargar la página.
-  history.replaceState(null, '', '#' + pageId);
-
-  // Volver arriba al cambiar de sección.
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-
-// Activar los botones del menú.
-
-document.querySelectorAll('.nav-btn').forEach(button => {
-
-  button.addEventListener('click', () => {
-    showPage(button.dataset.page);
-  });
-
-});
-
-
-// Permitir abrir directamente una sección mediante su enlace.
-
-const initialPage = location.hash.replace('#', '');
-
-if (document.getElementById(initialPage)) {
-  showPage(initialPage);
-}
-
-
-// 2. CREAR ESTRELLAS EN EL FONDO
-
-const starsContainer = document.getElementById('stars');
-
-for (let i = 0; i < 85; i++) {
-
-  const star = document.createElement('span');
-
-  star.className = 'star';
-
-  star.textContent = Math.random() > 0.5 ? '✦' : '·';
-
-  star.style.left = Math.random() * 100 + '%';
-
-  star.style.top = Math.random() * 100 + '%';
-
-  star.style.fontSize =
-    (Math.random() * 12 + 5) + 'px';
-
-  star.style.animationDelay =
-    Math.random() * 4 + 's';
-
-  star.style.animationDuration =
-    (Math.random() * 3 + 2) + 's';
-
-  starsContainer.appendChild(star);
-
-}
-
-
-// 3. CORAZONES FLOTANTES
-
-const heartsContainer = document.getElementById('hearts');
-
-function createHeart() {
-
-  const heart = document.createElement('span');
-
-  heart.className = 'heart';
-
-  const symbols = ['♡', '♥', '💕', '💗', '✧'];
-
-  heart.textContent =
-    symbols[Math.floor(Math.random() * symbols.length)];
-
-  heart.style.left = Math.random() * 100 + 'vw';
-
-  heart.style.fontSize =
-    (Math.random() * 20 + 12) + 'px';
-
-  heart.style.animationDuration =
-    (Math.random() * 5 + 6) + 's';
-
-  heartsContainer.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 11000);
-
-}
-
-setInterval(createHeart, 950);
-
-
-// 4. REPRODUCTOR DE MÚSICA
-
-const musicPlayer = document.getElementById('musicPlayer');
-
-musicPlayer.addEventListener('error', () => {
-
-  console.log(
-    'No se pudo cargar la canción. Revisa musica/nuestra-cancion.mp3'
-  );
-
-});
-
-
-// 5. ANIMACIÓN SUAVE DE LAS FOTOGRAFÍAS
-
-const photoCards = document.querySelectorAll('.photo-card');
-
-photoCards.forEach((card, index) => {
-
-  card.style.opacity = '0';
-
-  card.style.animation =
-    `photoAppear 0.8s ease ${index * 0.12}s forwards`;
-
-});
-
-
-// Si una fotografía todavía no existe, mostrar un aviso bonito.
-
-document.querySelectorAll('.photo-card img').forEach(img => {
-
-  img.addEventListener('error', () => {
-
-    img.style.display = 'none';
-
-    const placeholder = document.createElement('div');
-
-    placeholder.className = 'photo-placeholder';
-
-    placeholder.innerHTML = `
-      <span>♡</span>
-      <p>Tu recuerdo especial</p>
-    `;
-
-    img.parentElement.insertBefore(
-      placeholder,
-      img.nextSibling
-    );
-
-  });
-
-});
-
-
-// 6. MENSAJE DE BIENVENIDA EN LA CONSOLA
-
-console.log(`
-  ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
-
-       CARLA & JHON
-
-  Un pequeño universo creado
-       con muchísimo amor.
-
-  ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
-`);
-
-
-// 7. EFECTO DE APARICIÓN DE FOTOGRAFÍAS
-
-const animationStyle = document.createElement('style');
-
-animationStyle.textContent = `
-  @keyframes photoAppear {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  10% {
+    opacity: .8;
   }
 
-  .photo-placeholder {
-    width: 100%;
-    height: 290px;
-    background: linear-gradient(135deg, #321b3d, #160d20);
-    display: flex;
+  100% {
+    transform: translateY(-110vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* NAVEGACIÓN */
+
+.navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0b0710eF;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid #ffffff12;
+  padding: 13px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand {
+  color: var(--light-pink);
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.brand span {
+  color: var(--pink);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-btn {
+  color: #d9c3dd;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  color: white;
+  background: #542d60;
+  border-color: #a96dbb;
+}
+
+/* PÁGINAS */
+
+.page {
+  display: none;
+  min-height: 90vh;
+  padding: 75px 20px;
+  animation: pageEnter .7s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero {
+  padding-top: 25px;
+}
+
+.eyebrow {
+  color: var(--pink);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  display: inline-block;
+}
+
+/* TÍTULOS */
+
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(48px, 9vw, 88px);
+  line-height: 1.08;
+  color: var(--light-pink);
+  margin: 20px 0;
+}
+
+h1 span,
+h2 span {
+  color: var(--pink);
+  font-style: italic;
+}
+
+h2 {
+  font-size: clamp(40px, 7vw, 65px);
+  line-height: 1.1;
+  margin: 22px 0;
+  color: var(--light-pink);
+}
+
+h3 {
+  color: var(--pink);
+  font-size: 27px;
+}
+
+p {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.subtitle {
+  color: #eab7df;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.intro,
+.section-description {
+  max-width: 610px;
+  margin: 20px auto;
+}
+
+.divider {
+  width: 110px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8a1cf, transparent);
+  margin: 30px auto;
+}
+
+/* CORAZÓN PRINCIPAL */
+
+.main-heart {
+  color: #ee9dce;
+  font-size: 65px;
+  margin: 25px 0;
+  filter: drop-shadow(0 0 20px #d66bb6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.13);
+  }
+}
+
+/* TARJETAS */
+
+.quote-card,
+.promise-card {
+  max-width: 680px;
+  margin: 35px auto;
+  padding: 35px 25px;
+  border: 1px solid #d58bc033;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #281532d9, #120c1bdc);
+  box-shadow: 0 15px 45px #0004;
+}
+
+.quote-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(23px, 4vw, 30px);
+  color: #f3c9e9;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.quote-mark {
+  display: block;
+  color: var(--pink);
+  font-family: Georgia, serif;
+  font-size: 55px;
+  line-height: 1;
+}
+
+.quote-author {
+  display: block;
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.poetic {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 27px !important;
+  font-style: italic;
+  color: #f4c7e8 !important;
+}
+
+/* BOTONES */
+
+.primary-btn,
+.secondary-btn {
+  padding: 14px 24px;
+  border-radius: 35px;
+  cursor: pointer;
+  margin: 10px 5px;
+  font-size: 12px;
+  transition: .3s;
+}
+
+.primary-btn {
+  color: white;
+  border: 1px solid #e8a1cf77;
+  background: linear-gradient(135deg, #a84b91, #633d8d);
+  box-shadow: 0 5px 25px #a84b9130;
+}
+
+.secondary-btn {
+  color: #e8cce9;
+  border: 1px solid #b57dbb77;
+  background: #ffffff08;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px #d76cbd55;
+}
+
+/* MÚSICA */
+
+.music-card {
+  max-width: 450px;
+  margin: 35px auto;
+  padding: 30px 22px;
+  background: linear-gradient(140deg, #32173e, #170d20);
+  border: 1px solid #d88bce55;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px #0005;
+}
+
+.music-cover {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a74c98, #522d78);
+  color: white;
+  font-size: 35px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 25px #d66bb666;
+  animation: musicPulse 3s infinite;
+}
+
+@keyframes musicPulse {
+  50% {
+    box-shadow: 0 0 40px #e18acb99;
+  }
+}
+
+.music-card h3 {
+  margin-bottom: 10px;
+}
+
+.music-card audio {
+  width: 100%;
+  margin: 20px 0 10px;
+  accent-color: #bc66ac;
+}
+
+.music-note {
+  color: #d5afd4;
+  font-size: 10px;
+}
+
+/* GALERÍA */
+
+.section-title {
+  margin: 30px 0 20px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  margin: 35px auto;
+  max-width: 850px;
+}
+
+.photo-card {
+  overflow: hidden;
+  background: linear-gradient(145deg, #281532, #160e1c);
+  padding: 11px 11px 18px;
+  border: 1px solid #d88bce44;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px #0005;
+  transition: .4s;
+}
+
+.photo-card:nth-child(even) {
+  transform: translateY(15px) rotate(1deg);
+}
+
+.photo-card:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.photo-card:hover {
+  transform: translateY(-5px) rotate(0);
+  box-shadow: 0 15px 35px #b65a9e55;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 290px;
+  display: block;
+  object-fit: cover;
+  border-radius: 9px;
+  background: #2d1b34;
+}
+
+.photo-caption {
+  padding: 15px 5px 3px;
+}
+
+.photo-caption h3 {
+  font-size: 23px;
+}
+
+.photo-caption p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* PROMESAS */
+
+.promise-card {
+  padding: 30px;
+}
+
+.promise-icon {
+  font-size: 38px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.promise-card h3 {
+  margin-bottom: 15px;
+}
+
+/* CARTA */
+
+.letter-decoration {
+  font-size: 55px;
+  margin: 25px 0;
+  filter: drop-shadow(0 0 15px #d47bbd);
+}
+
+.letter-card {
+  max-width: 750px;
+  margin: 25px auto;
+  padding: clamp(25px, 6vw, 55px);
+  text-align: left;
+  background: linear-gradient(145deg, #291833e8, #160e1c);
+  border: 1px solid #d48ac044;
+  border-radius: 20px;
+  box-shadow: 0 15px 55px #0006;
+  position: relative;
+}
+
+.letter-card::before {
+  content: "♡";
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  font-size: 30px;
+  color: #c975ae66;
+}
+
+.letter-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 3vw, 24px);
+  line-height: 1.85;
+  color: #f0dced;
+  margin-bottom: 20px;
+}
+
+.letter-card .letter-greeting {
+  font-size: 29px;
+  color: var(--pink);
+  font-style: italic;
+}
+
+.letter-signature {
+  text-align: right;
+  font-family: 'Cormorant Garamond', serif;
+  color: #e9c9e5;
+  font-size: 23px;
+  margin-top: 35px;
+  line-height: 1.6;
+}
+
+.letter-signature span {
+  color: #f2a9d8;
+  font-size: 37px;
+  font-style: italic;
+}
+
+.final-message {
+  max-width: 650px;
+  margin: 55px auto 35px;
+}
+
+.final-message h2 {
+  font-size: 55px;
+}
+
+.final-message p {
+  max-width: 500px;
+  margin: 15px auto;
+}
+
+.final-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px !important;
+  font-style: italic;
+  color: #f0b7df !important;
+}
+
+.signature {
+  display: block;
+  color: #e8a1cf;
+  margin-top: 25px;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #ffffff12;
+  background: #09060eb0;
+  color: #d6b5d4;
+  font-size: 11px;
+}
+
+.footer-heart {
+  color: #ee9dce;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+footer p {
+  font-size: 11px;
+  margin: 8px;
+  color: #bda5c1;
+}
+
+footer span {
+  color: #84688c;
+  font-size: 10px;
+}
+
+/* PISTA DE DESPLAZAMIENTO */
+
+.scroll-hint {
+  color: #9f82a8;
+  font-size: 10px;
+  margin-top: 50px;
+  letter-spacing: 2px;
+  animation: hint 2s infinite;
+}
+
+@keyframes hint {
+  50% {
+    opacity: .4;
+    transform: translateY(5px);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 700px) {
+
+  .navbar {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #e8a1cf;
-    border-radius: 9px;
-    gap: 10px;
+    padding: 10px;
+    gap: 8px;
   }
 
-  .photo-placeholder span {
-    font-size: 45px;
+  .brand {
+    font-size: 25px;
   }
 
-  .photo-placeholder p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 21px;
+  .nav-links {
+    width: 100%;
+    gap: 3px;
   }
 
-  @media(max-width:700px) {
-    .photo-placeholder {
-      height: 190px;
-    }
+  .nav-btn {
+    padding: 9px 10px;
+    font-size: 10px;
   }
 
-  @media(max-width:370px) {
-    .photo-placeholder {
-      height: 260px;
-    }
+  .page {
+    padding: 55px 16px;
   }
-`;
 
-document.head.appendChild(animationStyle);
+  .gallery {
+    gap: 12px;
+  }
+
+  .photo-card img {
+    height: 190px;
+  }
+
+  .photo-caption h3 {
+    font-size: 20px;
+  }
+
+  .photo-caption p {
+    font-size: 10px;
+  }
+
+  .letter-card {
+    padding: 25px 20px;
+  }
+}
+
+@media(max-width: 370px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card img {
+    height: 260px;
+  }
+
+  .nav-btn {
+    padding: 8px 7px;
+    font-size: 9px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
