@@ -1,581 +1,821 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#100d0d">
-  <meta name="description" content="Un pequeño universo hecho para alguien muy especial.">
-  <title>J ♥ C — Nuestro pequeño universo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090707">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Jhon & Carla — Un universo para dos</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <meta name="description" content="Un pequeño universo creado por Jhon para Carla. Una historia hecha de fotografías, recuerdos y momentos especiales.">
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="grain"></div>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
-  <header class="topbar">
-    <a class="brand" href="#inicio" data-page="inicio">
-      <span class="brand-mark">J<span>♥</span>C</span>
-      <span class="brand-caption">UNIVERSO PRIVADO</span>
-    </a>
-
-    <nav class="main-nav" aria-label="Navegación principal">
-      <button class="nav-link active" data-page="inicio">Inicio</button>
-      <button class="nav-link" data-page="historia">Historia</button>
-      <button class="nav-link" data-page="galeria">Galería</button>
-      <button class="nav-link" data-page="carta">Carta</button>
-    </nav>
-
-    <button class="music-button" id="musicButton">
-      <span class="music-icon">♫</span>
-      <span id="musicLabel">ESCUCHAR</span>
-      <span class="music-bars">
-        <i></i><i></i><i></i><i></i>
-      </span>
-    </button>
-  </header>
-
-  <main>
-
-    <!-- 01. INICIO -->
-    <section class="page active" id="inicio">
-
-      <div class="hero-layout">
-        <div class="hero-copy reveal">
-          <div class="eyebrow">
-            <span class="eyebrow-line"></span>
-            UN LUGAR QUE SOLO NOS PERTENECE
-          </div>
-
-          <p class="hero-pretitle">Para Carla, con todo mi cariño.</p>
-
-          <h1>
-            No eres una<br>
-            casualidad.<br>
-            <em>Eres mi lugar.</em>
-          </h1>
-
-          <p class="hero-description">
-            Entre tantas personas, tantos lugares y tantos momentos,
-            qué bonito fue coincidir contigo. Este pequeño rincón existe
-            para guardar un poquito de todo lo que significas para mí.
-          </p>
-
-          <div class="hero-actions">
-            <button class="primary-button" data-go="historia">
-              Descubrir nuestro mundo <span>↗</span>
-            </button>
-            <span class="small-note">HECHO CON CARIÑO · J ♥ C</span>
-          </div>
-        </div>
-
-        <div class="hero-art reveal">
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
-          <div class="orbit orbit-three"></div>
-
-          <div class="hero-image-frame">
-            <img src="foto1.jpeg" alt="Uno de nuestros recuerdos">
-            <div class="image-shade"></div>
-            <div class="hero-image-caption">
-              <span>UN RECUERDO</span>
-              <strong>De esos que quiero conservar.</strong>
+    <!-- PANTALLA DE CARGA -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <span class="loader-symbol">J <i>♥</i> C</span>
+            <div class="loader-line">
+                <span></span>
             </div>
-          </div>
-
-          <div class="floating-heart">♥</div>
-          <div class="floating-star star-a">✦</div>
-          <div class="floating-star star-b">✧</div>
-          <div class="hero-stamp">J<br>♥<br>C</div>
+            <p>PREPARANDO UN PEQUEÑO UNIVERSO</p>
         </div>
-      </div>
+    </div>
 
-      <div class="hero-bottom">
-        <span>01 / 08</span>
-        <span class="bottom-message">UN PEQUEÑO UNIVERSO, UNA PERSONA ESPECIAL</span>
-        <button data-go="historia" class="scroll-link">BAJAR ↓</button>
-      </div>
+    <!-- FONDO ANIMADO -->
+    <canvas id="starCanvas"></canvas>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+    <div class="grain"></div>
 
-      <div class="intro-quote">
-        <span class="quote-symbol">“</span>
-        <p>Hay personas que llegan y hacen que los días tengan algo diferente.</p>
-        <span class="quote-author">— Y tú eres una de ellas.</span>
-      </div>
-    </section>
+    <!-- CURSOR DECORATIVO -->
+    <div class="cursor-glow"></div>
 
+    <!-- NAVEGACIÓN -->
+    <header class="header" id="header">
 
-    <!-- 02. HISTORIA -->
-    <section class="page" id="historia">
+        <a href="#inicio" class="brand">
+            <span>J</span>
+            <i>♥</i>
+            <span>C</span>
+        </a>
 
-      <div class="section-heading reveal">
-        <span class="section-number">02 / NUESTRA HISTORIA</span>
-        <p class="eyebrow">EL PRINCIPIO DE ALGO BONITO</p>
-        <h2>Todo comenzó<br>con <em>nosotros.</em></h2>
-        <p class="section-intro">
-          No necesito que nuestra historia sea perfecta.
-          Me gusta porque es nuestra, con cada momento,
-          cada conversación y cada recuerdo que hemos construido.
-        </p>
-      </div>
-
-      <div class="timeline">
-
-        <article class="timeline-item reveal">
-          <span class="timeline-marker">01</span>
-          <div class="timeline-content">
-            <span class="timeline-label">EL COMIENZO</span>
-            <h3>Cuando coincidimos</h3>
-            <p>
-              A veces lo más bonito empieza sin que uno se dé cuenta.
-              Una conversación, una sonrisa, un momento cualquiera
-              que termina convirtiéndose en algo importante.
-            </p>
-          </div>
-          <div class="timeline-decoration">✦</div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <span class="timeline-marker">02</span>
-          <div class="timeline-content">
-            <span class="timeline-label">LOS DÍAS JUNTOS</span>
-            <h3>Aprender a querernos</h3>
-            <p>
-              Fuimos creando nuestra propia manera de entendernos,
-              de compartir y de estar presentes. Y entre tantas cosas,
-              encontré razones para seguir eligiéndote.
-            </p>
-          </div>
-          <div class="timeline-decoration">♡</div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <span class="timeline-marker">03</span>
-          <div class="timeline-content">
-            <span class="timeline-label">LO QUE SOMOS</span>
-            <h3>Una historia que continúa</h3>
-            <p>
-              Todavía quedan muchísimas cosas por vivir.
-              No sé exactamente qué traerá cada día, pero me gusta
-              pensar que tendremos nuevos recuerdos que añadir aquí.
-            </p>
-          </div>
-          <div class="timeline-decoration">✧</div>
-        </article>
-
-      </div>
-
-      <div class="history-ending reveal">
-        <span>Y ESTO APENAS ES UNA PARTE...</span>
-        <strong>Lo mejor de nuestra historia también está por venir.</strong>
-      </div>
-
-      <button class="text-button" data-go="galeria">Ver nuestros recuerdos ↗</button>
-    </section>
-
-
-    <!-- 03. GALERÍA -->
-    <section class="page" id="galeria">
-
-      <div class="section-heading gallery-heading reveal">
-        <span class="section-number">03 / INSTANTES</span>
-        <p class="eyebrow">PEQUEÑOS PEDAZOS DE FELICIDAD</p>
-        <h2>Momentos que<br>merecen <em>quedarse.</em></h2>
-        <p class="section-intro">
-          Ocho fotografías, muchos sentimientos y recuerdos
-          que tienen un significado especial.
-          Haz clic en cualquiera para verla más grande.
-        </p>
-      </div>
-
-      <div class="photo-gallery">
-
-        <button class="photo-card photo-large reveal" data-photo="0">
-          <img src="foto1.jpeg" alt="Recuerdo número uno">
-          <span class="photo-overlay">
-            <span>01</span><strong>Un instante nuestro</strong><i>↗</i>
-          </span>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
         </button>
 
-        <button class="photo-card photo-tall reveal" data-photo="1">
-          <img src="foto2.jpeg" alt="Recuerdo número dos">
-          <span class="photo-overlay">
-            <span>02</span><strong>Un momento especial</strong><i>↗</i>
-          </span>
+        <nav class="navigation" id="navigation">
+            <a href="#inicio">Inicio</a>
+            <a href="#universo">Universo</a>
+            <a href="#galeria">Fotografías</a>
+            <a href="#recuerdos">Recuerdos</a>
+            <a href="#carta">Carta</a>
+            <a href="#final">Para siempre</a>
+        </nav>
+
+        <button class="music-button" id="musicButton">
+            <span class="music-icon">♫</span>
+            <span id="musicText">REPRODUCIR</span>
         </button>
 
-        <button class="photo-card reveal" data-photo="2">
-          <img src="foto3.jpeg" alt="Recuerdo número tres">
-          <span class="photo-overlay">
-            <span>03</span><strong>De esos días bonitos</strong><i>↗</i>
-          </span>
-        </button>
+    </header>
 
-        <button class="photo-card reveal" data-photo="3">
-          <img src="foto4.jpeg" alt="Recuerdo número cuatro">
-          <span class="photo-overlay">
-            <span>04</span><strong>Una parte de nosotros</strong><i>↗</i>
-          </span>
-        </button>
+    <!-- REPRODUCTOR -->
+    <audio id="backgroundMusic" loop preload="metadata">
+        <source src="Arctic Monkeys - Do I Wanna Know (Official Video).mp3" type="audio/mpeg">
+    </audio>
 
-        <button class="photo-card photo-wide reveal" data-photo="4">
-          <img src="foto5.jpeg" alt="Recuerdo número cinco">
-          <span class="photo-overlay">
-            <span>05</span><strong>Para recordar siempre</strong><i>↗</i>
-          </span>
-        </button>
+    <!-- INDICADOR DE PROGRESO -->
+    <div class="reading-progress" id="readingProgress"></div>
 
-        <button class="photo-card reveal" data-photo="5">
-          <img src="foto6.jpeg" alt="Recuerdo número seis">
-          <span class="photo-overlay">
-            <span>06</span><strong>Un pedacito de felicidad</strong><i>↗</i>
-          </span>
-        </button>
+    <main>
 
-        <button class="photo-card reveal" data-photo="6">
-          <img src="foto7.jpeg" alt="Recuerdo número siete">
-          <span class="photo-overlay">
-            <span>07</span><strong>Un recuerdo más</strong><i>↗</i>
-          </span>
-        </button>
+        <!-- ================================== -->
+        <!-- CAPÍTULO 01: PORTADA -->
+        <!-- ================================== -->
 
-        <button class="photo-card photo-final reveal" data-photo="7">
-          <img src="foto8.jpeg" alt="Recuerdo número ocho">
-          <span class="photo-overlay">
-            <span>08</span><strong>Y muchos más por venir</strong><i>↗</i>
-          </span>
-        </button>
+        <section class="hero section" id="inicio">
 
-      </div>
+            <div class="hero-stars">✦</div>
+            <div class="hero-orbit orbit-one"></div>
+            <div class="hero-orbit orbit-two"></div>
 
-      <div class="gallery-footer reveal">
-        <span>08 FOTOGRAFÍAS</span>
-        <span>INFINITAS RAZONES PARA RECORDAR</span>
-      </div>
-    </section>
+            <div class="hero-content reveal">
 
+                <span class="eyebrow">
+                    UNA HISTORIA QUE MERECE SER CONTADA
+                </span>
 
-    <!-- 04. DETALLES -->
-    <section class="page" id="detalles">
+                <h1>
+                    Jhon
+                    <span class="hero-heart">♥</span>
+                    Carla
+                </h1>
 
-      <div class="section-heading reveal">
-        <span class="section-number">04 / LO QUE VEO EN TI</span>
-        <p class="eyebrow">NO TODO SE TRATA DE GRANDES MOMENTOS</p>
-        <h2>Son los pequeños<br>detalles los que <em>importan.</em></h2>
-        <p class="section-intro">
-          Hay cosas que quizá parecen sencillas, pero que hacen
-          que alguien se vuelva inolvidable.
-        </p>
-      </div>
+                <div class="hero-separator">
+                    <span></span>
+                    <i>✧</i>
+                    <span></span>
+                </div>
 
-      <div class="details-grid">
+                <p class="hero-subtitle">
+                    Hay lugares que se visitan,
+                    <br>
+                    y hay personas que se convierten en hogar.
+                </p>
 
-        <article class="detail-block detail-feature reveal">
-          <span class="detail-icon">✧</span>
-          <span class="detail-index">01 — TU ESENCIA</span>
-          <h3>Tu manera<br>de ser.</h3>
-          <p>
-            No tienes que hacer nada extraordinario para ser especial.
-            Hay algo en tu forma de ser que te hace única.
-          </p>
-          <span class="detail-watermark">01</span>
-        </article>
+                <span class="hero-date">
+                    UN UNIVERSO HECHO DE PEQUEÑOS INSTANTES
+                </span>
 
-        <article class="detail-block reveal">
-          <span class="detail-icon">♡</span>
-          <span class="detail-index">02 — TU COMPAÑÍA</span>
-          <h3>Estar contigo.</h3>
-          <p>
-            Me gusta compartir tiempo contigo, incluso cuando
-            no estamos haciendo absolutamente nada.
-          </p>
-          <span class="detail-watermark">02</span>
-        </article>
+                <a href="#universo" class="discover-button">
+                    <span>DESCUBRIR NUESTRO UNIVERSO</span>
+                    <span class="discover-arrow">↓</span>
+                </a>
 
-        <article class="detail-block reveal">
-          <span class="detail-icon">☾</span>
-          <span class="detail-index">03 — NUESTROS DÍAS</span>
-          <h3>Lo cotidiano.</h3>
-          <p>
-            Las conversaciones, las bromas y esos momentos
-            que terminan siendo recuerdos sin planearlo.
-          </p>
-          <span class="detail-watermark">03</span>
-        </article>
+            </div>
 
-        <article class="detail-block detail-purple reveal">
-          <span class="detail-icon">✦</span>
-          <span class="detail-index">04 — LO QUE VIENE</span>
-          <h3>Todo lo que<br>nos falta vivir.</h3>
-          <p>
-            Todavía tenemos momentos por descubrir,
-            lugares por conocer y recuerdos por crear.
-          </p>
-          <span class="detail-watermark">04</span>
-        </article>
+            <div class="hero-bottom">
+                <span>01 — 08</span>
+                <span>DESLIZA PARA DESCUBRIR</span>
+                <span>J / C</span>
+            </div>
 
-      </div>
-
-      <div class="details-note reveal">
-        <span>UNA COSA QUE QUIERO QUE SEPAS</span>
-        <p>Me alegra que seas parte de mi vida.</p>
-      </div>
-    </section>
+        </section>
 
 
-    <!-- 05. CARTA -->
-    <section class="page" id="carta">
+        <!-- ================================== -->
+        <!-- CAPÍTULO 02: UNIVERSO -->
+        <!-- ================================== -->
 
-      <div class="letter-layout">
-        <div class="letter-side reveal">
-          <span class="section-number">05 / ALGO QUE QUIERO DECIRTE</span>
-          <p class="eyebrow">SIN PRISAS, LEE ESTO.</p>
-          <h2>Una carta<br>para <em>ti.</em></h2>
-          <div class="letter-seal">J <span>♥</span> C</div>
-          <p class="letter-side-note">ESCRITA CON CARIÑO, PARA ALGUIEN ESPECIAL.</p>
+        <section class="universe section" id="universo">
+
+            <div class="section-number reveal">
+                <span>CAPÍTULO 01</span>
+                <span>UNIVERSO</span>
+            </div>
+
+            <div class="universe-layout">
+
+                <div class="universe-text reveal">
+
+                    <span class="eyebrow">UN LUGAR ENTRE MILLONES</span>
+
+                    <h2>
+                        Si tuviera que
+                        <em>elegir</em>
+                        un universo...
+                    </h2>
+
+                    <p class="large-paragraph">
+                        Probablemente elegiría aquel en el que
+                        coincidimos.
+                    </p>
+
+                    <p>
+                        No porque todo tenga que ser perfecto,
+                        ni porque cada día sea extraordinario.
+                        Sino porque existen personas capaces de
+                        hacer que los momentos más sencillos
+                        tengan un significado diferente.
+                    </p>
+
+                    <p>
+                        Carla, esta pequeña página es una manera
+                        de reunir algunos de esos instantes y
+                        convertirlos en algo que pueda quedarse
+                        aquí, guardado en un rincón de internet.
+                    </p>
+
+                    <div class="signature">
+                        <span>Con cariño,</span>
+                        <strong>Jhon.</strong>
+                    </div>
+
+                </div>
+
+                <div class="universe-visual reveal">
+
+                    <div class="planet-container">
+
+                        <div class="planet-ring ring-one"></div>
+                        <div class="planet-ring ring-two"></div>
+
+                        <div class="planet">
+                            <span>J</span>
+                            <i>♥</i>
+                            <span>C</span>
+                        </div>
+
+                        <div class="planet-star star-a">✦</div>
+                        <div class="planet-star star-b">✧</div>
+                        <div class="planet-star star-c">✦</div>
+                        <div class="planet-star star-d">·</div>
+
+                    </div>
+
+                    <span class="planet-caption">
+                        TWO SOULS / ONE LITTLE UNIVERSE
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="universe-quote reveal">
+                <span>“</span>
+                <p>
+                    A veces, lo extraordinario no está en el lugar
+                    al que llegamos, sino en la persona con quien
+                    compartimos el camino.
+                </p>
+                <span>”</span>
+            </div>
+
+        </section>
+
+
+        <!-- ================================== -->
+        <!-- CAPÍTULO 03: GALERÍA -->
+        <!-- ================================== -->
+
+        <section class="gallery-section section" id="galeria">
+
+            <div class="section-heading reveal">
+
+                <div class="section-number">
+                    <span>CAPÍTULO 02</span>
+                    <span>FOTOGRAFÍAS</span>
+                </div>
+
+                <span class="eyebrow">FRAGMENTOS DE UNA HISTORIA</span>
+
+                <h2>
+                    Instantes que
+                    <em>merecen quedarse.</em>
+                </h2>
+
+                <p>
+                    Ocho fotografías. Ocho pequeños fragmentos
+                    de algo que no necesita demasiadas explicaciones.
+                </p>
+
+            </div>
+
+            <div class="gallery-grid">
+
+                <article class="photo-card photo-large reveal"
+                         data-image="foto1.jpeg"
+                         data-title="Fragmento 01"
+                         data-description="Un instante que merece quedarse.">
+
+                    <div class="photo-frame">
+                        <img src="foto1.jpeg" alt="Fotografía número uno" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>01 / MOMENTS</span>
+                            <h3>Un recuerdo.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-small reveal"
+                         data-image="foto2.jpeg"
+                         data-title="Fragmento 02"
+                         data-description="Una imagen, muchas emociones.">
+
+                    <div class="photo-frame">
+                        <img src="foto2.jpeg" alt="Fotografía número dos" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>02 / MOMENTS</span>
+                            <h3>Una sonrisa.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-small reveal"
+                         data-image="foto3.jpeg"
+                         data-title="Fragmento 03"
+                         data-description="Los pequeños detalles también cuentan.">
+
+                    <div class="photo-frame">
+                        <img src="foto3.jpeg" alt="Fotografía número tres" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>03 / MOMENTS</span>
+                            <h3>Un instante.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-large reveal"
+                         data-image="foto4.jpeg"
+                         data-title="Fragmento 04"
+                         data-description="Hay recuerdos que hablan por sí solos.">
+
+                    <div class="photo-frame">
+                        <img src="foto4.jpeg" alt="Fotografía número cuatro" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>04 / MOMENTS</span>
+                            <h3>Un pedacito de historia.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-small reveal"
+                         data-image="foto5.jpeg"
+                         data-title="Fragmento 05"
+                         data-description="Algo bonito para recordar.">
+
+                    <div class="photo-frame">
+                        <img src="foto5.jpeg" alt="Fotografía número cinco" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>05 / MOMENTS</span>
+                            <h3>Algo especial.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-small reveal"
+                         data-image="foto6.jpeg"
+                         data-title="Fragmento 06"
+                         data-description="Un momento que forma parte de nosotros.">
+
+                    <div class="photo-frame">
+                        <img src="foto6.jpeg" alt="Fotografía número seis" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>06 / MOMENTS</span>
+                            <h3>Un capítulo.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-large reveal"
+                         data-image="foto7.jpeg"
+                         data-title="Fragmento 07"
+                         data-description="Las fotografías guardan lo que las palabras no siempre pueden expresar.">
+
+                    <div class="photo-frame">
+                        <img src="foto7.jpeg" alt="Fotografía número siete" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>07 / MOMENTS</span>
+                            <h3>Una historia.</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="photo-card photo-small reveal"
+                         data-image="foto8.jpeg"
+                         data-title="Fragmento 08"
+                         data-description="Y todavía quedan muchos momentos por descubrir.">
+
+                    <div class="photo-frame">
+                        <img src="foto8.jpeg" alt="Fotografía número ocho" loading="lazy">
+                        <div class="photo-overlay">
+                            <span>08 / MOMENTS</span>
+                            <h3>Por continuar...</h3>
+                            <span class="view-photo">VER FOTOGRAFÍA ↗</span>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="gallery-end reveal">
+                <span>8 PHOTOGRAPHS</span>
+                <span>INFINITE MEMORIES</span>
+                <span>J + C</span>
+            </div>
+
+        </section>
+
+
+        <!-- ================================== -->
+        <!-- VISOR DE FOTOGRAFÍAS -->
+        <!-- ================================== -->
+
+        <div class="lightbox" id="lightbox">
+
+            <button class="lightbox-close" id="lightboxClose"
+                    aria-label="Cerrar fotografía">×</button>
+
+            <button class="lightbox-prev" id="lightboxPrev"
+                    aria-label="Fotografía anterior">‹</button>
+
+            <div class="lightbox-content">
+                <img id="lightboxImage" src="" alt="Fotografía ampliada">
+                <div class="lightbox-caption">
+                    <span id="lightboxTitle"></span>
+                    <p id="lightboxDescription"></p>
+                </div>
+            </div>
+
+            <button class="lightbox-next" id="lightboxNext"
+                    aria-label="Fotografía siguiente">›</button>
+
         </div>
 
-        <article class="letter-paper reveal">
-          <div class="paper-top">
-            <span>PARA CARLA</span>
-            <span>♡</span>
-          </div>
 
-          <div class="paper-content">
-            <p class="letter-greeting">Mi querida Carla:</p>
+        <!-- ================================== -->
+        <!-- CAPÍTULO 04: RECUERDOS -->
+        <!-- ================================== -->
 
-            <p>
-              Quería hacer algo diferente para ti. Algo que no fuera
-              solamente un mensaje más, sino un pequeño lugar al que
-              puedas volver cuando quieras recordar lo importante
-              que eres para mí.
-            </p>
+        <section class="memories-section section" id="recuerdos">
 
-            <p>
-              Gracias por los momentos que hemos compartido,
-              por las conversaciones, las risas y hasta por esas
-              pequeñas cosas que quizá parecen insignificantes,
-              pero que yo guardo con mucho cariño.
-            </p>
+            <div class="section-heading reveal">
 
-            <p>
-              No siempre encuentro las palabras exactas para expresar
-              lo que siento, pero quiero que sepas que valoro muchísimo
-              tenerte en mi vida. Me gusta nuestra historia, me gusta
-              lo que hemos construido y me emociona pensar en todo
-              lo que todavía nos queda por vivir.
-            </p>
+                <div class="section-number">
+                    <span>CAPÍTULO 03</span>
+                    <span>RECUERDOS</span>
+                </div>
 
-            <p>
-              No quiero que estas palabras sean solamente bonitas.
-              Quiero que sean un recordatorio de que detrás de cada
-              detalle de esta página hay alguien que pensó en ti
-              y quiso regalarte algo hecho especialmente para ti.
-            </p>
+                <span class="eyebrow">NO TODO CABE EN UNA FOTOGRAFÍA</span>
 
-            <p class="letter-closing">
-              Con muchísimo cariño,
-              <strong>J. ♥</strong>
-            </p>
-          </div>
+                <h2>
+                    Hay cosas que
+                    <em>se sienten.</em>
+                </h2>
 
-          <div class="paper-bottom">
-            <span>UNA CARTA QUE SIEMPRE SERÁ TUYA</span>
-            <span>J ♥ C</span>
-          </div>
-        </article>
-      </div>
-    </section>
+                <p>
+                    Algunas historias se construyen con grandes
+                    acontecimientos. Otras también encuentran
+                    su belleza en los detalles cotidianos.
+                </p>
+
+            </div>
+
+            <div class="memory-list">
+
+                <article class="memory-item reveal">
+                    <span class="memory-index">01</span>
+                    <div>
+                        <span class="memory-label">LOS MOMENTOS</span>
+                        <h3>Las cosas sencillas.</h3>
+                        <p>
+                            Una conversación inesperada, una broma
+                            que termina en risas o simplemente
+                            compartir un rato sin necesitar un plan.
+                        </p>
+                    </div>
+                    <span class="memory-symbol">✧</span>
+                </article>
+
+                <article class="memory-item reveal">
+                    <span class="memory-index">02</span>
+                    <div>
+                        <span class="memory-label">LOS DETALLES</span>
+                        <h3>Lo que parece pequeño.</h3>
+                        <p>
+                            Esos gestos que quizá pasan desapercibidos
+                            para los demás, pero que pueden transformar
+                            completamente un día.
+                        </p>
+                    </div>
+                    <span class="memory-symbol">♡</span>
+                </article>
+
+                <article class="memory-item reveal">
+                    <span class="memory-index">03</span>
+                    <div>
+                        <span class="memory-label">LAS PERSONAS</span>
+                        <h3>Lo que hace especial una historia.</h3>
+                        <p>
+                            Porque cada persona tiene una manera
+                            diferente de dejar huella en la vida
+                            de alguien.
+                        </p>
+                    </div>
+                    <span class="memory-symbol">✦</span>
+                </article>
+
+                <article class="memory-item reveal">
+                    <span class="memory-index">04</span>
+                    <div>
+                        <span class="memory-label">EL FUTURO</span>
+                        <h3>Todo lo que todavía falta.</h3>
+                        <p>
+                            Hay fotografías que aún no existen,
+                            lugares que todavía no conocemos y
+                            momentos que esperan su oportunidad.
+                        </p>
+                    </div>
+                    <span class="memory-symbol">∞</span>
+                </article>
+
+            </div>
+
+        </section>
 
 
-    <!-- 06. UNIVERSO -->
-    <section class="page universe-page" id="universo">
+        <!-- ================================== -->
+        <!-- CAPÍTULO 05: CARTA -->
+        <!-- ================================== -->
 
-      <div class="universe-stars"></div>
+        <section class="letter-section section" id="carta">
 
-      <div class="universe-content reveal">
-        <span class="section-number">06 / NUESTRO UNIVERSO</span>
-        <p class="eyebrow">DOS INICIALES, UNA HISTORIA</p>
+            <div class="section-number reveal">
+                <span>CAPÍTULO 04</span>
+                <span>UNA CARTA</span>
+            </div>
 
-        <div class="universe-monogram">
-          <span>J</span>
-          <i>♥</i>
-          <span>C</span>
+            <div class="letter-container reveal">
+
+                <div class="letter-top">
+                    <span>UNA NOTA ESCRITA CON CARIÑO</span>
+                    <span>J / C</span>
+                </div>
+
+                <div class="letter-decoration">✧</div>
+
+                <h2>
+                    Para ti,
+                    <em>Carla.</em>
+                </h2>
+
+                <div class="letter-body">
+
+                    <p>Mi querida Carla:</p>
+
+                    <p>
+                        Quería hacer algo diferente. Algo que no
+                        consistiera solamente en escribir unas
+                        cuantas palabras y dejar que se perdieran
+                        entre tantas otras cosas.
+                    </p>
+
+                    <p>
+                        Por eso decidí crear este pequeño espacio.
+                        Un lugar en el que pudiera reunir fotografías,
+                        pensamientos y algunos detalles que tienen
+                        un significado especial.
+                    </p>
+
+                    <p>
+                        A veces es difícil encontrar las palabras
+                        exactas para expresar lo que alguien representa.
+                        No siempre existe una frase perfecta,
+                        y tampoco creo que todo tenga que explicarse.
+                    </p>
+
+                    <p>
+                        Me gusta pensar que las personas somos
+                        como pequeños universos: llenos de historias,
+                        pensamientos, sueños, defectos, virtudes
+                        y cosas que todavía estamos descubriendo.
+                    </p>
+
+                    <p>
+                        Y entre tantas cosas que pueden pasar en
+                        este mundo, me parece bonito poder compartir
+                        contigo una parte de este camino.
+                    </p>
+
+                    <p>
+                        Quiero que esta página sea algo más que
+                        una colección de imágenes. Que sea un
+                        pequeño recuerdo al que puedas volver,
+                        mirar y encontrar un detalle diferente
+                        cada vez.
+                    </p>
+
+                    <p>
+                        Gracias por los momentos, por las
+                        conversaciones, por las sonrisas y por
+                        todas esas pequeñas cosas que terminan
+                        convirtiéndose en recuerdos.
+                    </p>
+
+                    <p>
+                        Todavía quedan muchas páginas en blanco,
+                        muchas fotografías por tomar y muchas
+                        historias que ni siquiera imaginamos.
+                    </p>
+
+                    <p class="letter-highlight">
+                        Esta página termina aquí, pero lo bonito
+                        de una historia es que siempre puede
+                        tener un nuevo capítulo.
+                    </p>
+
+                    <p class="letter-goodbye">
+                        Con mucho cariño,
+                    </p>
+
+                    <div class="letter-signature">
+                        Jhon <span>♥</span>
+                    </div>
+
+                </div>
+
+                <div class="letter-bottom">
+                    <span>ESCRITO PARA CARLA</span>
+                    <span>UNA PEQUEÑA PARTE DE MI UNIVERSO</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================== -->
+        <!-- CAPÍTULO 06: DETALLES -->
+        <!-- ================================== -->
+
+        <section class="details-section section">
+
+            <div class="section-heading reveal">
+
+                <div class="section-number">
+                    <span>CAPÍTULO 05</span>
+                    <span>PEQUEÑOS DETALLES</span>
+                </div>
+
+                <span class="eyebrow">COSAS QUE MERECEN RECORDARSE</span>
+
+                <h2>
+                    No todo necesita
+                    <em>ser enorme.</em>
+                </h2>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-card reveal">
+                    <span class="detail-icon">☾</span>
+                    <span class="detail-number">01</span>
+                    <h3>Las noches</h3>
+                    <p>
+                        Cuando el mundo se vuelve más tranquilo
+                        y aparecen nuevas conversaciones.
+                    </p>
+                </div>
+
+                <div class="detail-card reveal">
+                    <span class="detail-icon">✦</span>
+                    <span class="detail-number">02</span>
+                    <h3>Las sonrisas</h3>
+                    <p>
+                        Esas pequeñas razones que consiguen
+                        cambiar el ambiente de un día.
+                    </p>
+                </div>
+
+                <div class="detail-card reveal">
+                    <span class="detail-icon">♡</span>
+                    <span class="detail-number">03</span>
+                    <h3>Los recuerdos</h3>
+                    <p>
+                        Momentos que pasan rápidamente,
+                        pero que vale la pena conservar.
+                    </p>
+                </div>
+
+                <div class="detail-card reveal">
+                    <span class="detail-icon">∞</span>
+                    <span class="detail-number">04</span>
+                    <h3>Lo que viene</h3>
+                    <p>
+                        Todas las posibilidades que todavía
+                        no han encontrado su momento.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================== -->
+        <!-- CAPÍTULO 07: FUTURO -->
+        <!-- ================================== -->
+
+        <section class="future-section section">
+
+            <div class="future-background">
+                <span class="floating-symbol symbol-one">✦</span>
+                <span class="floating-symbol symbol-two">♡</span>
+                <span class="floating-symbol symbol-three">✧</span>
+                <span class="floating-symbol symbol-four">·</span>
+            </div>
+
+            <div class="future-content reveal">
+
+                <div class="section-number">
+                    <span>CAPÍTULO 06</span>
+                    <span>LO QUE VIENE</span>
+                </div>
+
+                <span class="eyebrow">TODAVÍA QUEDAN MUCHAS PÁGINAS</span>
+
+                <h2>
+                    Lo mejor de una historia
+                    <em>también puede estar por venir.</em>
+                </h2>
+
+                <p>
+                    No sabemos exactamente qué traerán los
+                    próximos días, meses o años. Pero todavía
+                    existen nuevos lugares por descubrir,
+                    nuevas fotografías por guardar y nuevas
+                    experiencias por vivir.
+                </p>
+
+                <div class="future-statement">
+                    <span>THE STORY CONTINUES</span>
+                    <i>∞</i>
+                    <span>JHON & CARLA</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================== -->
+        <!-- CAPÍTULO 08: FINAL -->
+        <!-- ================================== -->
+
+        <section class="final-section section" id="final">
+
+            <div class="final-orbit final-orbit-one"></div>
+            <div class="final-orbit final-orbit-two"></div>
+
+            <div class="final-content reveal">
+
+                <span class="eyebrow">EL ÚLTIMO CAPÍTULO DE ESTA PÁGINA</span>
+
+                <div class="final-initials">
+                    J <span>♥</span> C
+                </div>
+
+                <h2>
+                    Para Carla,
+                    <br>
+                    de parte de Jhon.
+                </h2>
+
+                <p>
+                    De todas las cosas que pueden guardarse
+                    en internet, esta es una pequeña colección
+                    de momentos que merecen un lugar especial.
+                </p>
+
+                <div class="final-divider">
+                    <span></span>
+                    ✧
+                    <span></span>
+                </div>
+
+                <p class="final-last-message">
+                    Gracias por formar parte de esta historia.
+                </p>
+
+                <span class="final-date">
+                    MADE WITH LOVE · J + C
+                </span>
+
+                <button class="restart-button" id="restartButton">
+                    VOLVER AL PRINCIPIO ↑
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+
+        <div class="footer-brand">
+            J <span>♥</span> C
         </div>
-
-        <h2>En medio de<br>tantas estrellas, <em>tú.</em></h2>
 
         <p>
-          Si nuestra historia fuera un universo,
-          cada recuerdo sería una estrella.
-          Algunos brillarían más que otros,
-          pero todos formarían parte del mismo cielo.
+            Una pequeña página. Muchos recuerdos.
+            Una historia que continúa.
         </p>
 
-        <div class="universe-orbit">
-          <div class="planet planet-one"></div>
-          <div class="planet planet-two"></div>
-          <div class="planet-center">J ♥ C</div>
-        </div>
+        <span class="footer-credit">
+            DISEÑADO POR JHON · PARA CARLA
+        </span>
 
-        <span class="universe-footer">NUESTRO PEQUEÑO UNIVERSO · SIN FINAL DEFINIDO</span>
-      </div>
-    </section>
+    </footer>
 
 
-    <!-- 07. DIARIO -->
-    <section class="page" id="diario">
-
-      <div class="section-heading reveal">
-        <span class="section-number">07 / PÁGINAS DE NOSOTROS</span>
-        <p class="eyebrow">RECUERDOS QUE NO QUIERO OLVIDAR</p>
-        <h2>Un diario de<br><em>pequeños momentos.</em></h2>
-        <p class="section-intro">
-          Porque no todos los recuerdos necesitan una fecha
-          para tener un lugar especial.
-        </p>
-      </div>
-
-      <div class="diary-layout">
-
-        <article class="diary-entry reveal">
-          <div class="diary-number">01</div>
-          <div>
-            <span class="diary-tag">UN RECUERDO</span>
-            <h3>Los momentos sencillos</h3>
-            <p>
-              Esos días en los que basta con compartir un rato,
-              hablar de cualquier cosa y disfrutar de la compañía.
-            </p>
-          </div>
-          <span class="diary-symbol">✧</span>
-        </article>
-
-        <article class="diary-entry reveal">
-          <div class="diary-number">02</div>
-          <div>
-            <span class="diary-tag">UNA SENSACIÓN</span>
-            <h3>La alegría de coincidir</h3>
-            <p>
-              Entre tantas posibilidades, nuestros caminos
-              terminaron encontrándose. Y eso siempre tendrá
-              algo bonito para mí.
-            </p>
-          </div>
-          <span class="diary-symbol">♡</span>
-        </article>
-
-        <article class="diary-entry reveal">
-          <div class="diary-number">03</div>
-          <div>
-            <span class="diary-tag">UN DESEO</span>
-            <h3>Seguir sumando recuerdos</h3>
-            <p>
-              Que algún día podamos mirar atrás y encontrar
-              muchísimas páginas nuevas llenas de momentos nuestros.
-            </p>
-          </div>
-          <span class="diary-symbol">☾</span>
-        </article>
-
-      </div>
-
-      <div class="diary-end reveal">
-        <span>ESTE DIARIO NO ESTÁ TERMINADO.</span>
-        <strong>Todavía nos quedan muchas páginas.</strong>
-      </div>
-    </section>
+    <!-- BOTÓN FLOTANTE -->
+    <button class="back-to-top" id="backToTop"
+            aria-label="Volver arriba">↑</button>
 
 
-    <!-- 08. FUTURO -->
-    <section class="page" id="futuro">
-
-      <div class="future-wrap reveal">
-        <span class="section-number">08 / LO QUE VIENE</span>
-        <p class="eyebrow">ESTA HISTORIA SIGUE ESCRIBIÉNDOSE</p>
-
-        <h2>Por todos los<br>momentos que<br><em>faltan.</em></h2>
-
-        <div class="future-divider">
-          <span></span> ♡ <span></span>
-        </div>
-
-        <p class="future-message">
-          Por las nuevas fotografías, las conversaciones inesperadas,
-          las risas, los planes y todos esos pequeños instantes
-          que todavía no sabemos que se convertirán en recuerdos.
-        </p>
-
-        <p class="future-last">
-          Gracias por formar parte de mi historia, Carla.
-        </p>
-
-        <div class="final-signature">
-          <span>CON CARIÑO,</span>
-          <strong>J <i>♥</i> C</strong>
-          <small>UN UNIVERSO QUE LLEVA NUESTROS NOMBRES.</small>
-        </div>
-
-        <button class="primary-button" data-go="inicio">
-          Volver al principio <span>↗</span>
-        </button>
-      </div>
-
-      <div class="future-decoration future-left">✧</div>
-      <div class="future-decoration future-right">♡</div>
-    </section>
-
-  </main>
-
-
-  <!-- NAVEGACIÓN INFERIOR -->
-  <footer class="site-footer">
-    <div class="footer-left">
-      <span class="footer-monogram">J <i>♥</i> C</span>
-      <span>HECHO PARA CARLA</span>
-    </div>
-
-    <div class="footer-center">
-      <button data-go="inicio">01</button>
-      <button data-go="historia">02</button>
-      <button data-go="galeria">03</button>
-      <button data-go="detalles">04</button>
-      <button data-go="carta">05</button>
-      <button data-go="universo">06</button>
-      <button data-go="diario">07</button>
-      <button data-go="futuro">08</button>
-    </div>
-
-    <span class="footer-right">UNA HISTORIA NUESTRA ♡</span>
-  </footer>
-
-
-  <!-- AUDIO -->
-  <audio id="backgroundMusic" loop preload="none">
-    <source src="Arctic Monkeys - Do I Wanna Know (Official Video).mp3" type="audio/mpeg">
-  </audio>
-
-
-  <!-- VISOR DE FOTOGRAFÍAS -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="closeLightbox" aria-label="Cerrar">×</button>
-    <button class="lightbox-arrow previous" id="previousPhoto" aria-label="Anterior">‹</button>
-
-    <div class="lightbox-inner">
-      <img id="lightboxImage" src="" alt="Fotografía ampliada">
-      <span id="lightboxCounter">01 / 08</span>
-    </div>
-
-    <button class="lightbox-arrow next" id="nextPhoto" aria-label="Siguiente">›</button>
-  </div>
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
 
 </body>
 </html>
